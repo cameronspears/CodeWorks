@@ -58,14 +58,19 @@ class CodeClipboard:
             display_file = str(file.relative_to(project_path))
             print(f"{i}: {display_file}")
 
-        selected_files = input(
-            "Enter the numbers of the files you want to select, separated by commas: "
+        selected_files_input = input(
+            "Enter the numbers of the files you want to select, separated by commas, or 'A' for all: "
         )
-        selected_files = [
-            all_files[int(i.strip())]
-            for i in selected_files.split(",")
-            if i.strip().isdigit()
-        ]  # convert numbers to files
+        
+        # Select all files if user inputs 'A' or 'a', otherwise select the chosen files
+        if selected_files_input.lower() == 'a':
+            selected_files = all_files
+        else:
+            selected_files = [
+                all_files[int(i.strip())]
+                for i in selected_files_input.split(",")
+                if i.strip().isdigit()
+            ]  # convert numbers to files
 
         clipboard_content = (
             ascii_tree + "####################################################\n"
