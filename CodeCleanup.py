@@ -1,5 +1,4 @@
 # CodeCleanup.py
-import tkinter as tk
 from tkinter import filedialog
 from pathlib import Path
 
