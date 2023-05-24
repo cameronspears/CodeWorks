@@ -28,8 +28,16 @@ class CodeCleanup:
             with open(file_path, "w", encoding="utf-8") as f:
                 f.write(formatted_content)
 
+        except black.NothingChanged as e:
+            print(f"No formatting changes needed for {file_path}.")
+            return False
+
+        except black.InvalidInput as e:
+            print(f"Invalid Python code in {file_path}: {str(e)}")
+            return False
+
         except Exception as e:
-            print(f"An error occurred while formatting {file_path}: {str(e)}")
+            print(f"An unexpected error occurred while formatting {file_path}: {str(e)}")
             return False
 
         return True
